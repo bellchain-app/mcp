@@ -1,0 +1,68 @@
+{
+  "manifest_version": "0.3",
+  "name": "bellchain",
+  "display_name": "Bellchain",
+  "version": "1.4.1",
+  "description": "Your Bellchain crypto alert chains and alerts in Claude: ask about them, test ideas in the replay, create and change chains.",
+  "long_description": "Bellchain is a no-code builder for crypto alerts. With this extension Claude reads your chains and alerts, explains why an alert fired, finds templates, checks prices, tests ideas in the replay and, when you ask for it, creates, changes, activates, pauses and deletes chains. It signs in with your own Bellchain API key (Trader plan), which Claude Desktop keeps in your system keychain. Secret settings of your chains, such as webhook addresses or bot codes, never reach Claude. Bellchain runs no AI of its own and sends nothing to AI providers.",
+  "author": {
+    "name": "Bellchain",
+    "url": "https://bellchain.app"
+  },
+  "homepage": "https://bellchain.app",
+  "documentation": "https://docs.bellchain.app/en/developers/mcp/",
+  "icon": "icon.png",
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.mjs",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/index.mjs"],
+      "env": {
+        "BELLCHAIN_API_KEY": "${user_config.api_key}"
+      }
+    }
+  },
+  "tools": [
+    { "name": "get_account", "description": "Account, plan and what the API key may do" },
+    { "name": "list_chains", "description": "All chains with status and markets" },
+    { "name": "get_chain", "description": "One chain with its nodes in plain language" },
+    { "name": "list_alerts", "description": "Alerts of the last 90 days with delivery and TP/SL result" },
+    { "name": "explain_alert", "description": "Why an alert fired and how it did with TP and SL" },
+    { "name": "list_templates", "description": "Templates from the gallery" },
+    { "name": "get_template", "description": "One template with all adjustable settings" },
+    { "name": "get_price", "description": "Current price of a trading pair" },
+    { "name": "replay_chain", "description": "How often a saved chain would have fired" },
+    { "name": "replay_template", "description": "How often a template with own values would have fired" },
+    { "name": "replay_price_alert", "description": "How often a price alert would have fired" },
+    { "name": "create_chain_from_template", "description": "Create a chain from a template, as a draft" },
+    { "name": "create_price_alert", "description": "Create a price alert, as a draft" },
+    { "name": "activate_chain", "description": "Activate a chain or take its changes live" },
+    { "name": "pause_chain", "description": "Pause a chain" },
+    { "name": "list_nodes", "description": "Building blocks for chains" },
+    { "name": "get_node", "description": "Building blocks in detail: pins and settings" },
+    { "name": "replay_definition", "description": "How often a chain from building blocks would have fired" },
+    { "name": "create_chain", "description": "Create a chain from building blocks, as a draft" },
+    { "name": "update_chain", "description": "Change the name, settings or nodes of a chain" },
+    { "name": "delete_chain", "description": "Delete a paused chain or a draft" }
+  ],
+  "tools_generated": false,
+  "keywords": ["crypto", "alerts", "price alerts", "trading", "replay", "bellchain"],
+  "license": "MIT",
+  "privacy_policies": ["https://bellchain.app/privacy"],
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "Bellchain API key",
+      "description": "Starts with bc_. Create it in Bellchain under Settings → API (Trader plan). “Read only” is enough for questions and replays; “Read and change” lets Claude create, change, activate, pause and delete chains.",
+      "sensitive": true,
+      "required": true
+    }
+  },
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=20.0.0"
+    }
+  }
+}

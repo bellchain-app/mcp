@@ -1,0 +1,31 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.bellchain-app/mcp",
+  "title": "Bellchain",
+  "description": "Crypto alert chains in your AI assistant: check alerts, test ideas with the replay, build chains.",
+  "repository": {
+    "url": "https://github.com/bellchain-app/mcp",
+    "source": "github",
+    "id": "1449310998"
+  },
+  "websiteUrl": "https://docs.bellchain.app/en/developers/mcp/",
+  "icons": [{ "src": "https://app.bellchain.app/icons/icon-512.png", "mimeType": "image/png", "sizes": ["512x512"] }],
+  "version": "1.4.1",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@bellchain-app/mcp",
+      "version": "1.4.1",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        {
+          "name": "BELLCHAIN_API_KEY",
+          "description": "Your Bellchain API key (Settings → API in the app; read-only keys work too)",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+# Publishes a release when a tag like v1.4.1 is pushed: first the npm package, with npm trusted publishing (no token in
+# this repository, provenance included), then the entry in the official MCP Registry, signed in with GitHub OIDC,
+# which gives repositories of this organization the namespace io.github.bellchain-app. Steps that are already done are
+# skipped, so a run can be repeated, for example after publishing to npm by hand. Actions and mcp-publisher are pinned;
+# the version is in the comment behind them.
+name: Publish
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: npm and MCP Registry
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      MCP_PUBLISHER_VERSION: 1.8.8
+      MCP_PUBLISHER_SHA256: 09f1fa70ee146b640584274a1a6b2b8a0310b05d4321fa9224e6df6a016d67f4
+      REGISTRY: https://registry.modelcontextprotocol.io/v0.1/servers
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          # No cache in release builds, as npm recommends for trusted publishing.
+          package-manager-cache: false
+      - name: Same version in tag, package.json and server.json
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          node --input-type=module -e '
+            import { readFileSync } from "node:fs";
+            const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+            const server = JSON.parse(readFileSync("server.json", "utf8"));
+            const versions = { tag: process.env.TAG.replace(/^v/, ""), "package.json": pkg.version, "server.json": server.version };
+            server.packages.forEach((entry, i) => { versions[`server.json packages[${i}]`] = entry.version; });
+            if (new Set(Object.values(versions)).size !== 1) {
+              console.error(`::error::Versions differ: ${JSON.stringify(versions)}`);
+              process.exit(1);
+            }
+            console.log(`Version ${pkg.version}`);
+          '
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - run: npm run smoke
+      - name: Publish to npm
+        run: |
+          name=$(node -p 'require("./package.json").name')
+          version=$(node -p 'require("./package.json").version')
+          if npm view "$name@$version" version >/dev/null 2>&1; then
+            echo "$name@$version is already on npm."
+          else
+            npm publish
+          fi
+          # The registry checks the package on npm, so wait until npm serves it.
+          for attempt in $(seq 1 20); do
+            npm view "$name@$version" version >/dev/null 2>&1 && exit 0
+            sleep 15
+          done
+          echo "::error::$name@$version is not on npm after 5 minutes."
+          exit 1
+      - name: Install mcp-publisher
+        run: |
+          curl -fsSL -o mcp-publisher.tar.gz "https://github.com/modelcontextprotocol/registry/releases/download/v${MCP_PUBLISHER_VERSION}/mcp-publisher_linux_amd64.tar.gz"
+          echo "${MCP_PUBLISHER_SHA256}  mcp-publisher.tar.gz" | sha256sum --check
+          tar -xzf mcp-publisher.tar.gz mcp-publisher
+      - name: Publish to the MCP Registry
+        run: |
+          name=$(node -p 'require("./server.json").name')
+          version=$(node -p 'require("./server.json").version')
+          url="$REGISTRY/${name/\//%2F}/versions/$version"
+          if [ "$(curl -s -o /dev/null -w '%{http_code}' "$url")" = 200 ]; then
+            echo "$name $version is already in the MCP Registry."
+          else
+            ./mcp-publisher login github-oidc
+            ./mcp-publisher publish
+          fi
+          curl -fsS "$url"

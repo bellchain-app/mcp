@@ -1,0 +1,33 @@
+{
+  "note": "Written by the Bellchain sync; do not edit.",
+  "version": "2026.11.07.09",
+  "files": {
+    ".dockerignore": "851f4ff7826947a5c2cfaa42e7cdca1f8b82dee2fef7ef645ded8ceb36711059",
+    ".github/workflows/ci.yml": "3fafc1680fcd056a41d6c86d483723676aa8078d90446864a189c3fc0d63984a",
+    ".github/workflows/publish.yml": "f0b2dbe60236ba378d22587a6683b920e92d571c2b9caa4961dccbe42c4a25df",
+    ".gitignore": "68b2fe891fefdc13f6ab00a2290f944725a18260d78edeb9d7ad719bcf9030a5",
+    "CONTRIBUTING.md": "c089a24c014f9d3d43332a5ef34b30776781ab712c983a7f0d984f28e21f51b4",
+    "Dockerfile": "b353b46506e33d26c3b5ddc31423e545ac873a7294989282c2f213d3e7750249",
+    "glama.json": "a6f7a1a0412fe55e381ee41e046c1ff7eae7ce62b5b5832146ca4fd08260952a",
+    "LICENSE": "67e7ebe97ed5d5ca469350c58527dc60be14e97664f12d684f9169a618a675a7",
+    "llms-install.md": "beccc3588aa811546447dff8f0a41eba0ce0899b05430202f396cf383d922bff",
+    "mcpb/icon.png": "1c54c4006e091c18caece9573057f9d907102dd1fe03d607f5bdd9ec9d5b7a28",
+    "mcpb/manifest.json": "5a44835a4e0c4b1ef3e6eb4684584584c78e5bf6f3c92ad534fbcba40b123b32",
+    "package.json": "81e205225ba7462565190f8caa892a47fcb6a76ebccfe8b5d6cb9353072c5139",
+    "README.md": "6faccc4db3bc2930f056120821fe5998fd34933e7e92679a4e29a213e380343f",
+    "scripts/mcpb.ts": "686250391d532f8aa32f59b20d86942bba4a67e6a30b7fda4b10260e3d790b3f",
+    "scripts/smoke.ts": "dd0de7dae429074950c0ea2d7fcdf7416849c2e027daf67cdd615ff7963eebda",
+    "SECURITY.md": "ef450cb9323ebca25454729bcff17882f088ab62b7c10439c7b140381f786c5e",
+    "server.json": "b136be707e4cec08927a72d08b253fec4ea8e74a201cd3a1cc950badbf3e2373",
+    "src/api.ts": "4658c050a85de10aad5085d4c6445add0e3e6074e5494e626a3d729d7baefc23",
+    "src/cli.ts": "eacda2ac58ce765499c2b611236c9221b0c42696867dc11d0d11fe8a9b3c8108",
+    "src/data.ts": "7734df5fe8ca0782924cc00b7a2f9559e4c91508d84cda3e4b9a33a0b73db44f",
+    "src/definition.ts": "83da2a371c4a1b8b89c2703bd86e52256aec51d45eed869a2c73ad7eb155c16b",
+    "src/server.ts": "5b35c2ab4fc760a4f4e918121d30d9dd9dc3e958195d3e33d8621022caee2fe4",
+    "src/values.ts": "28ac87d2e13eb4f0a186ebee7adf8a252d522eb090a27982716991c876cc233d",
+    "test/mcpb.test.ts": "62fd99fb62d444dc8e245c4599d2b70b1f7d8702b49c0e33d7efd7036c022762",
+    "test/server.test.ts": "0386717a971c68b6bb3177de4427b0185592855ca0ba96b89a2faa7d962be419",
+    "tsconfig.build.json": "292890b12960903b69919821c287f5f7d8e27d24b6d416abd449c180856b0b8e",
+    "tsconfig.json": "95264cbc9b15180fe46731f2d464889a114c1db470663b11d291cb0dc01a3d76"
+  }
+}

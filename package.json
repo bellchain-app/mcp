@@ -1,0 +1,67 @@
+{
+  "name": "@bellchain-app/mcp",
+  "version": "1.4.1",
+  "mcpName": "io.github.bellchain-app/mcp",
+  "description": "MCP server for Bellchain: your crypto alert chains and alerts in AI assistants such as Claude, Cursor or VS Code, with your own Bellchain API key.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "bellchain-mcp": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && chmod +x dist/cli.js",
+    "prepack": "npm run build",
+    "mcpb": "node scripts/mcpb.ts",
+    "smoke": "node scripts/smoke.ts",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "bellchain",
+    "crypto",
+    "alerts",
+    "claude",
+    "cursor"
+  ],
+  "homepage": "https://docs.bellchain.app/en/developers/mcp/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bellchain-app/mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bellchain-app/mcp/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.4.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@anthropic-ai/mcpb": "2.1.2",
+    "@modelcontextprotocol/client": "2.4.0",
+    "@types/node": "24.19.2",
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  },
+  "overrides": {
+    "@anthropic-ai/mcpb": {
+      "zod": "4.6.7"
+    },
+    "external-editor": {
+      "tmp": "0.2.7"
+    }
+  }
+}
