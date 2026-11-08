@@ -25,6 +25,10 @@ Needs Node.js 20 or later.
 
 `get_account`, `list_chains`, `get_chain`, `list_alerts`, `explain_alert`, `list_templates`, `get_template`, `get_price`, `list_nodes`, `get_node`, `replay_chain`, `replay_template`, `replay_price_alert`, `replay_definition` read only. `create_chain_from_template`, `create_price_alert` and `create_chain` (from building blocks in the chain format) create drafts; `update_chain`, `activate_chain`, `pause_chain` and `delete_chain` change chains and are marked as such, so assistants ask before calling them. Changes are saved as a new revision that an active chain picks up only with `activate_chain`; only paused chains and drafts can be deleted, after a check of their name.
 
+## Agent Skill
+
+[`skills/bellchain-crypto-alerts/SKILL.md`](skills/bellchain-crypto-alerts/SKILL.md) tells agents when Bellchain fits and how to work with it: templates and price alerts first, test in the replay before anything goes live, report results after fees as a look back, and ask before changing a chain. Without an API key it links to the free replay.
+
 ## Security
 
 - The key is read from `BELLCHAIN_API_KEY` and sent only to `https://api.bellchain.app/v1` over HTTPS, never to the assistant.

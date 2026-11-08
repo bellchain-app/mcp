@@ -1,6 +1,6 @@
 {
   "note": "Written by the Bellchain sync; do not edit.",
-  "version": "2026.11.07.09",
+  "version": "2026.11.07.13",
   "files": {
     ".dockerignore": "851f4ff7826947a5c2cfaa42e7cdca1f8b82dee2fef7ef645ded8ceb36711059",
     ".github/workflows/ci.yml": "3fafc1680fcd056a41d6c86d483723676aa8078d90446864a189c3fc0d63984a",
@@ -14,11 +14,12 @@
     "mcpb/icon.png": "1c54c4006e091c18caece9573057f9d907102dd1fe03d607f5bdd9ec9d5b7a28",
     "mcpb/manifest.json": "5a44835a4e0c4b1ef3e6eb4684584584c78e5bf6f3c92ad534fbcba40b123b32",
     "package.json": "81e205225ba7462565190f8caa892a47fcb6a76ebccfe8b5d6cb9353072c5139",
-    "README.md": "6faccc4db3bc2930f056120821fe5998fd34933e7e92679a4e29a213e380343f",
+    "README.md": "90dfef264eb09deaab7f72bc72f41d5eb253718dde2c1a3cde5aae14fff4af56",
     "scripts/mcpb.ts": "686250391d532f8aa32f59b20d86942bba4a67e6a30b7fda4b10260e3d790b3f",
     "scripts/smoke.ts": "dd0de7dae429074950c0ea2d7fcdf7416849c2e027daf67cdd615ff7963eebda",
     "SECURITY.md": "ef450cb9323ebca25454729bcff17882f088ab62b7c10439c7b140381f786c5e",
     "server.json": "b136be707e4cec08927a72d08b253fec4ea8e74a201cd3a1cc950badbf3e2373",
+    "skills/bellchain-crypto-alerts/SKILL.md": "832b7285e65cff44ad27842f1e1569c01b8894172ccc8aa5ee69233ee9ed5773",
     "src/api.ts": "4658c050a85de10aad5085d4c6445add0e3e6074e5494e626a3d729d7baefc23",
     "src/cli.ts": "eacda2ac58ce765499c2b611236c9221b0c42696867dc11d0d11fe8a9b3c8108",
     "src/data.ts": "7734df5fe8ca0782924cc00b7a2f9559e4c91508d84cda3e4b9a33a0b73db44f",
